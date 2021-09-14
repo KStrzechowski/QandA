@@ -17,7 +17,7 @@ export interface AnswerData {
 const questions: QuestionData[] = [
   {
     questionId: 1,
-    title: 'Why should I learn TypeScrpit?',
+    title: 'Why should I learn TypeScript?',
     content:
       'TypeScrpit seems to be getting popular so I wondered wheter it is worth my time learning it? What benefits does it give over JavaScrpit?',
     userName: 'Bob',
