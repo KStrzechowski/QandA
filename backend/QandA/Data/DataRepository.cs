@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Dapper;
 using QandA.Data.Models;
+using static Dapper.SqlMapper;
 
 namespace QandA.Data
 {
@@ -34,18 +35,20 @@ namespace QandA.Data
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                var question = connection.QueryFirstOrDefault<QuestionGetSingleResponse>(
-                    @"EXEC dbo.Question_GetSingle @QuestionId = @QuestionId", new { QuestionId = questionId }
-                );
-
-                if (question != null)
+                using (GridReader results = connection.QueryMultiple(
+                        @"EXEC dbo.Question_GetSingle @QuestionId = @QuestionId;
+                        EXEC dbo.Answer_Get_ByQuestionId @QuestionId = @QuestionId",
+                        new { QuestionID = questionId }
+                    )
+                )
                 {
-                    question.Answers = connection.Query<AnswerGetResponse>(
-                        @"EXEC dbo.Answer_Get_ByQuestionId @QuestionId = @QuestionId", new { QuestionId = questionId }
-                    );
+                    var question = results.Read<QuestionGetSingleResponse>().FirstOrDefault();
+                    if (question != null)
+                    {
+                        question.Answers = results.Read<AnswerGetResponse>().ToList();
+                    }
+                    return question;
                 }
-
-                return question;
             }
         }
 
@@ -55,6 +58,30 @@ namespace QandA.Data
             {
                 connection.Open();
                 return connection.Query<QuestionGetManyResponse>(@"EXEC dbo.Question_GetMany");
+            }
+        }
+
+        public IEnumerable<QuestionGetManyResponse> GetQuestionsWithAnswers()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                var questionDictionary = new Dictionary<int, QuestionGetManyResponse>();
+                return connection.Query<QuestionGetManyResponse, AnswerGetResponse, QuestionGetManyResponse>(
+                    @"EXEC dbo.Question_GetMany_WithAnswers", map: (q, a) =>
+                    {
+                        QuestionGetManyResponse question;
+                        if (!questionDictionary.TryGetValue(q.QuestionId, out question))
+                        {
+                            question = q;
+                            question.Answers = new List<AnswerGetResponse>();
+                            questionDictionary.Add(question.QuestionId, question);
+                        }
+                        question.Answers.Add(a);
+                        return question;
+                    },
+                    splitOn: "QuestionId"
+                ).Distinct().ToList();
             }
         }
 
