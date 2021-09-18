@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "KoQP8Pr1cwbUYfdJzQ1/I3e31yUm4P+ey41s+YgeZuEAsGahofCF1tbTqFnEiuS25+Nc6wlN8QMlpLWOWGpizw==",
+  "dgSpecHash": "yIw3hM9lrph1uyt55/rZDXJcbbNoNId5WqXT9rSb807nO7PD6xr6sw5cBtj3xiti/W2mCCgTMj2cluitD4miiQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\kondi\\source\\repos\\QandA\\backend\\QandA\\QandA.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\kondi\\.nuget\\packages\\dbup\\4.5.0\\dbup.4.5.0.nupkg.sha512",
     "C:\\Users\\kondi\\.nuget\\packages\\dbup-core\\4.5.0\\dbup-core.4.5.0.nupkg.sha512",
     "C:\\Users\\kondi\\.nuget\\packages\\dbup-sqlserver\\4.5.0\\dbup-sqlserver.4.5.0.nupkg.sha512",
+    "C:\\Users\\kondi\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.10\\microsoft.aspnetcore.authentication.jwtbearer.5.0.10.nupkg.sha512",
     "C:\\Users\\kondi\\.nuget\\packages\\microsoft.azure.services.appauthentication\\1.3.1\\microsoft.azure.services.appauthentication.1.3.1.nupkg.sha512",
     "C:\\Users\\kondi\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.0.0\\microsoft.bcl.asyncinterfaces.1.0.0.nupkg.sha512",
     "C:\\Users\\kondi\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
