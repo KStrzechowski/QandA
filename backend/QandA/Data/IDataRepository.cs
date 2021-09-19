@@ -13,6 +13,7 @@ namespace QandA.Data
         Task<IEnumerable<QuestionGetManyResponse>> GetQuestionsBySearchAsync(string search);
         Task<IEnumerable<QuestionGetManyResponse>> GetQuestionsBySearchWithPagingAsync(string search, int pageNumber, int pageSize);
         Task<IEnumerable<QuestionGetManyResponse>> GetUnansweredQuestionsAsync();
+        Task<IEnumerable<QuestionGetManyResponse>> GetUnansweredQuestionsWithPagingAsync(int pageNumber, int pageSize);
         Task<QuestionGetSingleResponse> GetQuestionAsync(int questionId);
         Task<AnswerGetResponse> GetAnswerAsync(int answerId);
         Task<bool> QuestionExistsAsync(int questionId);

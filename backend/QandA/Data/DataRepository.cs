@@ -87,6 +87,21 @@ namespace QandA.Data
             }
         }
 
+        public async Task<IEnumerable<QuestionGetManyResponse>> GetUnansweredQuestionsWithPagingAsync(int pageNumber, int pageSize)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                var parameters = new
+                {
+                    PageNumber = pageNumber,
+                    PageSize = pageSize
+                };
+                return await connection.QueryAsync<QuestionGetManyResponse>(@"EXEC dbo.Question_GetUnanswered_WithPaging
+                    @PageNumber = @PageNumber, @PageSize = @PageSize", parameters);
+            }
+        }
+
         public async Task<QuestionGetSingleResponse> GetQuestionAsync(int questionId)
         {
             using (var connection = new SqlConnection(_connectionString))

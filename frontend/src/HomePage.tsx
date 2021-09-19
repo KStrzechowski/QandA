@@ -1,41 +1,39 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { QuestionList } from './QuestionList';
-import { getUnansweredQuestions } from './QuestionData';
+import { getUnansweredQuestions, QuestionData } from './QuestionData';
 import { Page } from './Page';
 import { PageTitle } from './PageTitle';
 import { PrimaryButton } from './Styles';
 import { useNavigate } from 'react-router';
-import {
-  gettingUnansweredQuestionsAction,
-  gotUnansweredQuestionsAction,
-  AppState,
-} from './Store';
+import { useAuth } from './Auth';
 
 export const HomePage = () => {
-  const dispatch = useDispatch();
-  const questions = useSelector(
-    (state: AppState) => state.questions.unanswered,
-  );
-  const questionsLoading = useSelector(
-    (state: AppState) => state.questions.loading,
-  );
+  const [questions, setQuestions] = React.useState<QuestionData[]>([]);
+  const [questionsLoading, setQuestionsLoading] = React.useState(true);
 
   React.useEffect(() => {
+    let cancelled = false;
     const doGetUnansweredQuestions = async () => {
-      dispatch(gettingUnansweredQuestionsAction());
       const unansweredQuestions = await getUnansweredQuestions();
-      dispatch(gotUnansweredQuestionsAction(unansweredQuestions));
+      if (!cancelled) {
+        setQuestions(unansweredQuestions);
+        setQuestionsLoading(false);
+      }
     };
     doGetUnansweredQuestions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      cancelled = true;
+    };
   }, []);
+
   const navigate = useNavigate();
   const handleAshQuestionClick = () => {
     navigate('ask');
   };
+
+  const { isAuthenticated } = useAuth();
 
   return (
     <Page>
@@ -47,9 +45,11 @@ export const HomePage = () => {
         `}
       >
         <PageTitle>Unanswered Questions</PageTitle>
-        <PrimaryButton onClick={handleAshQuestionClick}>
-          Ask a question
-        </PrimaryButton>
+        {isAuthenticated && (
+          <PrimaryButton onClick={handleAshQuestionClick}>
+            Ask a question
+          </PrimaryButton>
+        )}
       </div>
       {questionsLoading ? (
         <div>Loading...</div>

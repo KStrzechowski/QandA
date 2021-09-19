@@ -70,9 +70,9 @@ namespace QandA.Controllers
         }
 
         [HttpGet("unanswered")]
-        public async Task<IEnumerable<QuestionGetManyResponse>> GetUnansweredQuestions()
+        public async Task<IEnumerable<QuestionGetManyResponse>> GetUnansweredQuestions(int page = 1, int pageSize = 20)
         {
-            return await _dataRepository.GetUnansweredQuestionsAsync();
+            return await _dataRepository.GetUnansweredQuestionsWithPagingAsync(page, pageSize);
         }
 
         [Authorize]
