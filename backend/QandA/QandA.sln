@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QandA", "QandA.csproj", "{1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E9398A26-1007-4DAF-8639-E673E7DA398D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackendTests", "..\BackendTests\BackendTests.csproj", "{E460811F-B277-40FC-9FFB-456480DB1F03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,6 +19,10 @@ Global
 		{169BD977-928A-42A7-8CDA-9BD17947A4AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{169BD977-928A-42A7-8CDA-9BD17947A4AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{169BD977-928A-42A7-8CDA-9BD17947A4AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E460811F-B277-40FC-9FFB-456480DB1F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E460811F-B277-40FC-9FFB-456480DB1F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E460811F-B277-40FC-9FFB-456480DB1F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E460811F-B277-40FC-9FFB-456480DB1F03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

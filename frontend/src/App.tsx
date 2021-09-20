@@ -57,7 +57,7 @@ function App() {
               />
               <Route path="signin" element={<SignInPage action="signin" />} />
               <Route
-                path="/signin-callback"
+                path="signin-callback"
                 element={<SignInPage action="signin-callback" />}
               />
               <Route
@@ -65,7 +65,7 @@ function App() {
                 element={<SignOutPage action="signout" />}
               />
               <Route
-                path="/signout-callback"
+                path="signout-callback"
                 element={<SignOutPage action="signout-callback" />}
               />
               <Route path="questions/:questionId" element={<QuestionPage />} />

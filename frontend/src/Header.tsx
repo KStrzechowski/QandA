@@ -94,7 +94,7 @@ export const Header = () => {
           <div>
             <span>{user!.name}</span>
 
-            <Link to="signout" css={buttonStyle}>
+            <Link to="/signout" css={buttonStyle}>
               <UserIcon />
               <span>Sign Out</span>
             </Link>
